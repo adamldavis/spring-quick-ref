@@ -1,0 +1,13 @@
+#Gradle
+.gradle
+build
+#Maven
+target
+*.class
+#IDEA
+.idea
+*.iws
+*.ipr
+*.imp
+
+
