@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 @UtilityClass
 public class Output {
 
-	private final Logger LOG = LoggerFactory.getLogger(Output.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Output.class);
 
 	public static void list(Iterable<?> categories, String title) {
 

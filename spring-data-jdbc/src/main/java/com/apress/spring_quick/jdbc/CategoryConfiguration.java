@@ -55,7 +55,7 @@ public class CategoryConfiguration extends AbstractJdbcConfiguration {
 	@Bean
 	public BeforeSaveCallback<Category> timeStampingSaveTime() {
 
-		return (entity, AdvancedChange) -> {
+		return (entity, aggregateChange) -> {
 
 			entity.timeStamp();
 

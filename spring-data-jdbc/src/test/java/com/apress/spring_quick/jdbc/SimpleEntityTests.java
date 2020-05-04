@@ -32,8 +32,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Demonstrates simple CRUD operations with a simple entity without any references.
- *
- * @author Jens Schauder
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = CategoryConfiguration.class)
