@@ -3,12 +3,22 @@
  */
 package com.apress.spring_quick.aop;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.*;
+
+@Configuration
+@PropertySource("classpath:/application.properties")
+@ComponentScan // <-- scan using current package as base
+@EnableAspectJAutoProxy // <--- AOP
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        final ApplicationContext applicationContext = new AnnotationConfigApplicationContext(App.class);
+
+        Repository repository = applicationContext.getBean(Repository.class);
+        Iterable<Object> all = repository.findAll();
+        all.forEach(System.out::println);
+
+        repository.delete("123");
     }
 }
