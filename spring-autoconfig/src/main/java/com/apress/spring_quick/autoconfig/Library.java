@@ -4,7 +4,9 @@
 package com.apress.spring_quick.autoconfig;
 
 public class Library {
+
     public boolean someLibraryMethod() {
         return true;
     }
+
 }

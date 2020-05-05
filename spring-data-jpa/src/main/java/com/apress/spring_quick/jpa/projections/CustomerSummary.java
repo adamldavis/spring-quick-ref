@@ -17,9 +17,7 @@ package com.apress.spring_quick.jpa.projections;
 
 import org.springframework.beans.factory.annotation.Value;
 
-/**
- * @author Oliver Gierke
- */
+
 public interface CustomerSummary {
 
 	@Value("#{target.firstname + ' ' + target.lastname}")

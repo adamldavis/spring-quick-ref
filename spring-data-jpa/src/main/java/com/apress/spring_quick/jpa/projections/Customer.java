@@ -23,7 +23,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 /**
- * @author Oliver Gierke
+ * Basic Customer Entity class using Lombok.
  */
 @Data
 @Entity

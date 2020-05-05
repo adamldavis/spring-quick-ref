@@ -5,6 +5,7 @@
  * For more details take a look at the Java Libraries chapter in the Gradle
  * User Manual available at https://docs.gradle.org/5.6.2/userguide/java_library_plugin.html
  */
+/* Copyright Adam L. Davis, 2020. */
 
 plugins {
     // Apply the java-library plugin to add support for Java Library
@@ -12,10 +13,16 @@ plugins {
 }
 
 repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenLocal()
+    mavenCentral()
 }
+ext {
+    // defines variables to be used in dependencies block
+    springVersion = '5.1.9.RELEASE'
+}
+group = 'com.apress.spring-quick'
+version = '0.0.1'
+sourceCompatibility = '11'
 
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
@@ -23,6 +30,12 @@ dependencies {
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:28.0-jre'
+
+    // Spring Boot Auto-config: in a real app you should just use spring boot with starters
+    implementation "org.springframework.boot:spring-boot-autoconfigure:2.2.6.RELEASE"
+
+    // spring-boot-configuration-processor: generates metadata about classes annotated with @ConfigurationProperties
+    implementation "org.springframework.boot:spring-boot-configuration-processor:2.2.6.RELEASE"
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'

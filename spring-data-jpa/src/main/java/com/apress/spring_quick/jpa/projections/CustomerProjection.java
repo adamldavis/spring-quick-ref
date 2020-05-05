@@ -15,9 +15,7 @@
  */
 package com.apress.spring_quick.jpa.projections;
 
-/**
- * @author Oliver Gierke
- */
+
 public interface CustomerProjection {
 	String getFirstname();
 }
