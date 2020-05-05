@@ -34,15 +34,15 @@ import java.util.Arrays;
 class CachingConfiguration {
 
     @Bean
-    public Cache userByUsername() {
-        return new ConcurrentMapCache("userByUsername");
+    public Cache courseByName() {
+        return new ConcurrentMapCache("courseByName");
     }
 
     @Bean
-    public CacheManager cacheManager(@Qualifier("userByUsername") final Cache userByUsername) {
+    public CacheManager cacheManager(@Qualifier("courseByName") final Cache courseByName) {
         SimpleCacheManager manager = new SimpleCacheManager();
 
-        manager.setCaches(Arrays.asList(userByUsername));
+        manager.setCaches(Arrays.asList(courseByName));
 
         return manager;
     }

@@ -15,13 +15,12 @@
  */
 package com.apress.spring_quick.jpa.projections;
 
-import org.assertj.core.api.Assertions;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Page;
@@ -31,7 +30,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.projection.TargetAware;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Collection;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,7 +39,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-@DataJpaTest
 public class CustomerRepositoryIntegrationTest {
 
     @Configuration
@@ -58,6 +55,10 @@ public class CustomerRepositoryIntegrationTest {
     public void setUp() {
         this.george = customers.save(new Customer("George", "Washington"));
         this.jim = customers.save(new Customer("Jimmy", "Carter"));
+    }
+    @After
+    public void deleteAll() {
+        customers.deleteAll();
     }
 
     @Test
@@ -112,15 +113,6 @@ public class CustomerRepositoryIntegrationTest {
         assertThat(projectedDave.getFirstname()).isEqualTo("George");
         assertThat(projectedDave).isInstanceOfSatisfying(TargetAware.class,
                 it -> assertThat(it.getTarget()).isInstanceOf(Map.class));
-    }
-
-    @Test
-    public void projectsDtoUsingConstructorExpression() {
-
-        Collection<CustomerDto> result = customers.findDtoWithConstructorExpression("George");
-
-        Assertions.assertThat(result).hasSize(1);
-        assertThat(result.iterator().next().getFirstname()).isEqualTo("George");
     }
 
     @Test

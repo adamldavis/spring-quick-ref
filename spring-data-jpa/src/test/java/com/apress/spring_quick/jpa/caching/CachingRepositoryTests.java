@@ -19,10 +19,12 @@ import com.apress.spring_quick.jpa.simple.Course;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,14 +32,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Integration test to show how to use {@link Cacheable} with a Spring Data repository.
- *
- * @author Oliver Gierke
- * @author Thomas Darimont
- * @author Andrea Rizzini
  */
 @RunWith(SpringRunner.class)
 @Transactional
 @SpringBootTest
+@EntityScan(basePackages = "com.apress.spring_quick.jpa.simple")
 public class CachingRepositoryTests {
 
     @Autowired

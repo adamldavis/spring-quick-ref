@@ -23,10 +23,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Oliver Gierke
  */
+@Repository
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
 	/**
@@ -96,15 +98,6 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	 * @return
 	 */
 	Page<CustomerProjection> findPagedProjectedBy(Pageable pageable);
-
-	/**
-	 * A DTO projection using a constructor expression in a manually declared query.
-	 *
-	 * @param firstname
-	 * @return
-	 */
-	@Query("select new CustomerDto(c.firstname) from Customer c where c.firstname = ?1")
-	Collection<CustomerDto> findDtoWithConstructorExpression(String firstname);
 
 	/**
 	 * A projection wrapped into an {@link Optional}.
