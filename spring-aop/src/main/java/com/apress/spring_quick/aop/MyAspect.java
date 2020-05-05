@@ -2,10 +2,7 @@ package com.apress.spring_quick.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -51,6 +48,12 @@ public class MyAspect {
     @Before("logMes()")
     public void beforeLog(final JoinPoint joinPoint) {
         System.out.println("INFO: Calling " + joinPoint.toLongString());
+    }
+
+    // Pointcut expressions can be combined using &&, || and ! operators:
+    @AfterReturning("repository() && logMes()")
+    public void afterCall(final JoinPoint joinPoint) {
+        System.out.println("INFO: Call was successful! " + joinPoint.toLongString());
     }
 
 }
