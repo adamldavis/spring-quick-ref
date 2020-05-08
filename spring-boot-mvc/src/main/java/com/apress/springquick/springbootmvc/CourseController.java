@@ -8,12 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /*
  * Copyright 2020, Adam L. Davis
  */
-@Controller("/v1")
+@Controller
+@RequestMapping("/web") //<-- every URL gets prefixed with this
 public class CourseController {
 
     final SimpleCourseRepository simpleCourseRepository;
@@ -27,7 +29,7 @@ public class CourseController {
     }
 
     @GetMapping("/courses")
-    public ModelAndView getCourses() {
+    public ModelAndView courses() {
         getCounter.increment();
         final ModelAndView modelAndView = new ModelAndView();
 
