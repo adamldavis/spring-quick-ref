@@ -1,6 +1,6 @@
 
 plugins {
-    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'org.springframework.boot' version '2.3.0.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id "java"
 }
@@ -10,7 +10,7 @@ sourceCompatibility = '11'
 
 ext {
     mobileVersion = '1.1.5.RELEASE'
-    springBootVersion = '2.2.6.RELEASE'
+    springBootVersion = '2.3.0.RELEASE'
     // Backend using JPA (use `./mvnw install` on it to install it)
     springQuickJpaVersion = '0.0.1'
     // database
@@ -37,6 +37,9 @@ dependencies {
 test {
     useJUnitPlatform()
     exclude '**/*TestBase*'
+}
+wrapper {
+    gradleVersion = '6.3'
 }
 
 task("run").dependsOn = ['bootRun']

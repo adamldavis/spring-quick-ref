@@ -32,10 +32,10 @@ dependencies {
     implementation 'com.google.guava:guava:28.0-jre'
 
     // Spring Boot Auto-config: in a real app you should just use spring boot with starters
-    implementation "org.springframework.boot:spring-boot-autoconfigure:2.2.6.RELEASE"
+    implementation "org.springframework.boot:spring-boot-autoconfigure:2.3.0.RELEASE"
 
     // spring-boot-configuration-processor: generates metadata about classes annotated with @ConfigurationProperties
-    implementation "org.springframework.boot:spring-boot-configuration-processor:2.2.6.RELEASE"
+    implementation "org.springframework.boot:spring-boot-configuration-processor:2.3.0.RELEASE"
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
