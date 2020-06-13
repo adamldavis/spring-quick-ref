@@ -1,0 +1,19 @@
+plugins {
+    id "org.asciidoctor.convert" version "1.5.9.2"
+    id "java"
+}
+ext {
+    snippetsDir = file('build/generated-snippets')
+    ver = '2.0.4.RELEASE'
+}
+dependencies {
+    asciidoctor "org.springframework.restdocs:spring-restdocs-asciidoctor:$ver"
+    testCompile "org.springframework.restdocs:spring-restdocs-mockmvc:$ver"
+}
+test {
+    outputs.dir snippetsDir
+}
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
+}
