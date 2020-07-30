@@ -3,12 +3,16 @@ package com.apress.spring_quick.reactor;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 import reactor.test.StepVerifier;
+import reactor.test.StepVerifierOptions;
 import reactor.test.publisher.TestPublisher;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -42,6 +46,27 @@ public class ReactorTests {
                 .expectNext(9)
                 .expectComplete()                      //4
                 .verify(Duration.ofSeconds(10));       //5
+    }
+
+    @Test
+    public void testStepVerifier_Flux_backpressure() {
+        Flux<Integer> source = Flux.<Integer>create(emitter -> { //1
+            emitter.next(1);
+            emitter.next(2);
+            emitter.next(3);
+            emitter.next(4);
+            emitter.complete();
+        }).onBackpressureDrop();                            //2
+
+        StepVerifier.withVirtualTime(() -> source, 3)   //3
+                .expectNext(1)
+                .expectNext(2)
+                .expectNext(3)
+                .thenAwait(Duration.ofSeconds(1)) // not really necessary here
+                // but this is the sort of thing you can do with virtual time
+                .expectComplete()                       //4
+                .verifyThenAssertThat()
+                .tookLessThan(Duration.ofMillis(50));   //5
     }
 
     @Test
